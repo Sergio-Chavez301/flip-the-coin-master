@@ -1,14 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Kanit:wght@600&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Kanit:wght@600&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
 
     <link
       rel="icon"
@@ -17,7 +25,11 @@
       sizes="96x96"
     />
 
-    <title>Flip the coin | devChallenges.io</title>
+    <title>Lanza la moneda | devChallenges.io</title>
+    <meta
+      name="description"
+      content="Lanza una moneda virtual y descubre al azar si sale cara o cruz."
+    />
 
     <!--You are welcome to delete these styles or modify them in your own stylesheet -->
     <style>
@@ -33,65 +45,84 @@
         font-size: 14px;
         text-align: center;
         margin-top: 16px;
-        color: rgb(55, 65, 81);
       }
 
       .container h1 {
-        font-family: "Poppins", sans-serif;
-        font-size: 50px;
+        font-family: "kanit", sans-serif;
+        font-size: 64px;
         color: #fff;
-        text-shadow: 5px 5px 10px #252b3a;
+        text-shadow: 2px 2px 0px #35383f;
+        -webkit-text-stroke-width: 5px;
+        -webkit-text-stroke-color: #35383f;
       }
 
       .container p {
-        font-family: "Poppins", sans-serif;
-        font-size: 20px;
-        text-decoration: none;
+        font-family: "kanit", sans-serif;
+        font-weight: 600;
+        font-size: 24px;
         color: #fff;
+
       }
       .container button {
-        font-family: "Poppins", sans-serif;
+        font-family: "kanit", sans-serif;
+        font-weight: 600;
         font-size: 20px;
-        text-decoration: none;
         color: #fff;
         background-color: #206fb1;
         border-radius: 10px;
         padding: 10px 20px;
         border: none;
         cursor: pointer;
+
       }
     </style>
   </head>
   <body>
-      <div class="container">
-        <h1>Flip the coin</h1>
+      <main role="main" class="container">
+        <h1>Flip a Coin Game</h1>
         <p>Press the coin or the button to flip the coin</p>
-        <div id="coin">
-          <img src="resources/heads.svg" alt="Heads" id="coin-image"/>
+        <div  id="coin">
+          <img
+            src="resources/heads.svg"
+            alt="Heads"
+            id="coin-image"
+            width="160"
+            height="160"
+            fetchpriority="high"
+            decoding="async"
+          />
         </div>
-        <img src="resources/shadow.svg" alt="Shadow" id="coin-image"/><br />
+        <img
+          src="resources/shadow.svg"
+          alt=""
+          width="100"
+          height="8"
+          aria-hidden="true"
+          decoding="async"
+        /><br />
         <p id="result">Heads</p>
-        <button id="flip-button" >Random</button>
-      </div>
-      <br />
+        <button id="flip-button">Flip Coin</button>
+      </main>
+      <script role="script">
+        const coinImage = document.getElementById("coin-image");
+        const resultText = document.getElementById("result");
+        const flipButton = document.getElementById("flip-button");
+
+        function flipCoin() {
+          const randomNumber = Math.random();
+          if (randomNumber < 0.5) {
+            coinImage.src = "resources/heads.svg";
+            coinImage.alt = "Heads";
+            resultText.textContent = "Heads";
+          } else {
+            coinImage.src = "resources/tails.svg";
+            coinImage.alt = "Tails";
+            resultText.textContent = "Tails";
+          }
+        }
+
+        coinImage.addEventListener("click", flipCoin);
+        flipButton.addEventListener("click", flipCoin);
+      </script>
   </body>
-  <script>
-    const coinImage = document.getElementById("coin-image");
-    const resultText = document.getElementById("result");
-    const flipButton = document.getElementById("flip-button");
-
-    function flipCoin() {
-      const randomNumber = Math.random();
-      if (randomNumber < 0.5) {
-        coinImage.src = "resources/heads.svg";
-        resultText.textContent = "Heads";
-      } else {
-        coinImage.src = "resources/tails.svg";
-        resultText.textContent = "Tails";
-      }
-    }
-
-    coinImage.addEventListener("click", flipCoin);
-    flipButton.addEventListener("click", flipCoin);
-  </script>
 </html>
