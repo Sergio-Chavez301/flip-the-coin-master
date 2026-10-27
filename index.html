@@ -3,6 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap"
+      rel="stylesheet"
+    />
 
     <link
       rel="icon"
@@ -16,43 +22,76 @@
     <!--You are welcome to delete these styles or modify them in your own stylesheet -->
     <style>
       * {
-        margin: 0;
+        margin-top: 20px;
         padding: 0;
         box-sizing: border-box;
+        background-color: #404a65;
       }
 
-      body {
-        height: 100vh;
-      }
 
-      .author-info {
+      .container {
         font-size: 14px;
         text-align: center;
         margin-top: 16px;
         color: rgb(55, 65, 81);
       }
 
-      .author-info a {
+      .container h1 {
+        font-family: "Poppins", sans-serif;
+        font-size: 50px;
+        color: #fff;
+        text-shadow: 5px 5px 10px #252b3a;
+      }
+
+      .container p {
+        font-family: "Poppins", sans-serif;
+        font-size: 20px;
         text-decoration: none;
+        color: #fff;
+      }
+      .container button {
+        font-family: "Poppins", sans-serif;
+        font-size: 20px;
+        text-decoration: none;
+        color: #fff;
+        background-color: #206fb1;
+        border-radius: 10px;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
       }
     </style>
   </head>
   <body>
-    <!-- 
-
-    Flip a Coin Game
-    Press the coin or the button to flip the coin
-    Head
-    Tail
-    Random
-  
-    -->
-
-    <div class="author-info">
-      Coded by <a href="#">Your Name Here</a> | Challenge by
-      <a href="https://www.devchallenges.io?ref=challenge" target="_blank"
-        >devChallenges.io</a
-      >.
-    </div>
+      <div class="container">
+        <h1>Flip the coin</h1>
+        <p>Press the coin or the button to flip the coin</p>
+        <div id="coin">
+          <img src="resources/heads.svg" alt="Heads" id="coin-image"/>
+        </div>
+        <img src="resources/shadow.svg" alt="Shadow" id="coin-image"/><br />
+        <p id="result"></p>
+        <button id="flip-button" >Random</button>
+      </div>
+      <br />
   </body>
+  <script>
+    const coinImage = document.getElementById("coin-image");
+    const resultText = document.getElementById("result");
+    const flipButton = document.getElementById("flip-button");
+
+    function flipCoin() {
+      const randomNumber = Math.random();
+      if (randomNumber < 0.5) {
+        coinImage.src = "resources/heads.svg";
+        resultText.textContent = "Heads";
+      } else {
+        coinImage.src = "resources/tails.svg";
+        resultText.textContent = "Tails";
+      }
+    }
+
+    coinImage.addEventListener("click", flipCoin);
+    flipButton.addEventListener("click", flipCoin);
+  </script>
 </html>
